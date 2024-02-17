@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real-Time Clock</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        height: 100vh;
+        background-color: #000;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .watch {
+        border: 10px solid #fff;
+        border-radius: 50%;
+        width: 400px; /* Increased width */
+        height: 400px; /* Increased height */
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #clock {
+        font-size: 2.5em; /* Increased font size */
+        margin-bottom: 20px;
+    }
+    #date {
+        font-size: 1.2em; /* Increased font size */
+    }
+</style>
+</head>
+<body>
+<div class="watch">
+    <div id="clock"></div>
+    <div id="date"></div>
+</div>
+
+<script>
+function updateTime() {
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    var seconds = now.getSeconds();
+    var month = now.toLocaleString('default', { month: 'long' }); // Get full month name
+    var day = now.toLocaleString('default', { weekday: 'long' }); // Get full day name
+    var date = now.getDate(); // Get date of the month
+
+    hours = (hours < 10 ? "0" : "") + hours;
+    minutes = (minutes < 10 ? "0" : "") + minutes;
+    seconds = (seconds < 10 ? "0" : "") + seconds;
+
+    var timeString = hours + ":" + minutes + ":" + seconds;
+    var dateString = day + ", " + month + " " + date;
+
+    document.getElementById('clock').textContent = timeString;
+    document.getElementById('date').textContent = dateString;
+}
+
+updateTime();
+setInterval(updateTime, 1000); // Update every second
+</script>
+</body>
+</html>
